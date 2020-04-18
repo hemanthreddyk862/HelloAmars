@@ -23,4 +23,14 @@ steps:
   inputs:
     contents: '**/*.apk'
     targetFolder: '$(build.artifactStagingDirectory)'
-- task: PublishBuildArtifacts@1
+
+- task: UniversalPackages@0
+  inputs:
+    command: 'publish'
+    publishDirectory: '$(build.artifactStagingDirectory)'
+    feedsToUsePublish: 'internal'
+    vstsFeedPublish: '64ca1e9f-9723-4d44-b9c3-e1e7edfb6115/b8d6dbb9-0ada-4579-885f-c6c5c52c4732'
+    vstsFeedPackagePublish: 'heamr'
+    versionOption: 'patch'
+    publishedPackageVar: 'd'
+
