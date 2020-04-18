@@ -41,7 +41,7 @@ steps:
     command: 'download'
     downloadDirectory: '$(System.DefaultWorkingDirectory)'
     feedsToUse: 'internal'
-    vstsFeed: 'cf95f01f-ae28-4dd9-a601-05dc2389d9a8/c0469580-37c1-4837-8171-1a09d95c13a4'
+    vstsFeed: '64ca1e9f-9723-4d44-b9c3-e1e7edfb6115/b8d6dbb9-0ada-4579-885f-c6c5c52c4732'
     vstsFeedPackage: '1jjjjjjjjjjjjj'
     vstsPackageVersion: '0.0.1'
 
