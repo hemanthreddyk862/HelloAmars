@@ -1,0 +1,47 @@
+# Android
+# Build your Android project with Gradle.
+# Add steps that test, sign, and distribute the APK, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/android
+
+trigger:
+- master
+
+pool:
+
+  vmImage: 'macos-latest'
+
+steps:
+- task: Gradle@2
+  inputs:
+    workingDirectory: ''
+    gradleWrapperFile: 'gradlew'
+    gradleOptions: '-Xmx3072m'
+    publishJUnitResults: false
+    testResultsFiles: '**/TEST-*.xml'
+    tasks: 'assembleDebug'
+
+- task: CopyFiles@2
+  inputs:
+    contents: '**/*.apk'
+    targetFolder: '$(build.artifactStagingDirectory)'
+
+- task: UniversalPackages@0
+  inputs:
+    command: 'publish'
+    publishDirectory: '$(Build.ArtifactStagingDirectory)'
+    feedsToUsePublish: 'internal'
+    vstsFeedPublish: 'cf95f01f-ae28-4dd9-a601-05dc2389d9a8/c0469580-37c1-4837-8171-1a09d95c13a4'
+    vstsFeedPackagePublish: '1jjjjjjjjjjjjj'
+    versionOption: 'patch'
+
+
+
+- task: UniversalPackages@0
+  inputs:
+    command: 'download'
+    downloadDirectory: '$(System.DefaultWorkingDirectory)'
+    feedsToUse: 'internal'
+    vstsFeed: 'cf95f01f-ae28-4dd9-a601-05dc2389d9a8/c0469580-37c1-4837-8171-1a09d95c13a4'
+    vstsFeedPackage: '1jjjjjjjjjjjjj'
+    vstsPackageVersion: '0.0.1'
+
